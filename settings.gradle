@@ -1,0 +1,3 @@
+include ':SunmiLibrary'
+include ':app'
+rootProject.name = "SunmiPrinterLibrary"
