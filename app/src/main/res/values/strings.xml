@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SunmiPrinterLibrary</string>
+    <string name="test_printer_label">Test Printer</string>
 </resources>

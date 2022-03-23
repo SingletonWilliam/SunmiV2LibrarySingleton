@@ -1,13 +1,13 @@
 package com.singleton.sunmiprinterlibrary;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.singleton.sunmilibrary.utils_printer.BluetoothUtil;
+import com.singleton.sunmilibrary.utils_printer.Alignment;
 import com.singleton.sunmilibrary.utils_printer.SunmiPrintHelper;
 import com.singleton.sunmilibrary.utils_printer.SunmiPrinterStatus;
 
@@ -24,16 +24,22 @@ public class MainActivity extends AppCompatActivity implements SunmiPrinterStatu
 
     @Override
     public void sunmiPrinterOnConnected() {
-        int tamanoLetra = 24;
-        if (!BluetoothUtil.isBlueToothPrinter) {
-            SunmiPrintHelper sunmiPrinter = SunmiPrintHelper.getInstance();
-            sunmiPrinter.printText("Hola Mundo", tamanoLetra, false, false);
-            sunmiPrinter.feedPaper();
-        }
+        Toast.makeText(this, "Printer is connected", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void sunmiPrinterOnDisconnected() {
-        Toast.makeText(this, "No se reconoció ninguna impresora", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Printer is disconnected", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClickTestPrinter(View view) {
+        int fontSize = 24;
+        if (!BluetoothUtil.isBlueToothPrinter) {
+            SunmiPrintHelper sunmiPrinter = SunmiPrintHelper.getInstance();
+            sunmiPrinter.setFonSize(fontSize);
+            sunmiPrinter.setAlign(Alignment.ALIGN_CENTER);
+            sunmiPrinter.printText("Hello world");
+            sunmiPrinter.feedPaper();
+        }
     }
 }
